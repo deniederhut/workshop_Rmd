@@ -1,0 +1,68 @@
+---
+title: "Rmd slides"
+author: "Dillon Niederhut"
+date: "February 3, 2015"
+output: ioslides_presentation
+---
+
+# This is a slide break
+## This is a new slide
+### This is a subheading
+
+## Within a slide, you can have plain text
+
+1. As a numbered list
+2. That goes on
+3. As long as you like
+    
+- Or as a bulleted list
+    - With sublists
+
+[Or a link that will open separately in a web browser](dlab.berkeley.edu)
+
+Or just plain text with *italics*, **boldface**, ~subscript~, ^superscript^, and ~~strikethrough~~
+
+## Within a slide, you can have code
+
+Inline code is created by putting a `single back tick` on each end of the code
+
+```
+Code blocks are created with three back ticks above and below
+```
+
+Note that, as written, these will not actually run anything
+
+## Within a slide, you can have a picture
+
+![](http://dlab.berkeley.edu/sites/default/files/pfrontiera_11032014.jpg)
+
+The image source can be local or remote, but Rmd does not currently allow you to resize
+
+## Within a slide, you can have a table
+
+Table Name | Col 1 Name | Col 2 Name
+-----------|------------|-----------
+Row 1 Name | (1,1)      | (1,2)
+Row 2 Name | (2,1)      | (2,2)
+
+
+This will still format correctly even if you don't add the extra whitespace to make everything line up - they're only there to make it more human readable. If you don't want to have a table name, you'll need to bracket the left and right sides of each row with |
+
+## Within a slide, you can evaluate code
+
+```{r}
+model <- lm(dist ~ speed, data = cars)
+summary(model)
+```
+
+## Within a slide, you can create a plot
+
+```{r, echo=FALSE,message=FALSE,fig.height=5,fig.width=7}
+plot(cars, xlab = "Speed (mph)", ylab = "Stopping distance (ft)",
+     las = 1)
+title(main = "cars data")
+```
+
+## For more information, see
+
+[Reference Guide](http://rmarkdown.rstudio.com/RMarkdownReferenceGuide.pdf)
