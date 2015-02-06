@@ -2,7 +2,7 @@
 title: "Rmd documents"
 author: "Dillon Niederhut"
 date: "February 3, 2015"
-output: html_document
+output: pdf_document
 ---
 
 # This is a level 1 heading
