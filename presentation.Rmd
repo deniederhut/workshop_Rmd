@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Keeping it simple with R Markdown"
 author: "Dillon Niederhut"
 date: "February 5, 2015"
 output: ioslides_presentation
@@ -9,7 +9,7 @@ output: ioslides_presentation
 # I like to use an initial batch of r code to load packages, import data, and do any 
 # other formatting that doesn't need to be seen by your audience. If there are important
 # data processings steps that you want to talk about, this is not the place to put them.
-# options(warn=-1)
+ options(warn=-1)
 # When your presentation is ready to roll, uncomment the preceeding line to globally
 # suppress any warnings about errors in your code. Note that if you go back to change
 # something and it messes up a bunch of stuff, you won't get any warnins about the unholy
@@ -19,10 +19,6 @@ load(file="dat.Rda")
 dat <- dat[1:(dim(dat)[[1]]-2),]
 ```
 
-## Markdown formatting
-
-![](https://gs1.wac.edgecastcdn.net/8019B6/data.tumblr.com/tumblr_ln7va2TrXs1qawld4o1_500.gif)
-
 ## Rmd is an easy way to generate documents
 
 ```{r}
@@ -30,7 +26,7 @@ model <- t.test(x=dat$variable.4[dat$variable.3 == 'Giant'],
                 y=dat$variable.4[dat$variable.3 == 'Sandwich'])
 ```
 
-"An independent samples t test showed the groups to be significantly different, t = ```r model$statistic[[1]]```, df = ```r model$parameter[[1]]```, p = ```r model$p.value[[1]]```"
+"An independent samples t test showed the groups were not significantly different, t = ```r model$statistic[[1]]```, df = ```r model$parameter[[1]]```, p = ```r model$p.value[[1]]```"
 
 Unnecessary table | group 1 | group 2
 ------------------|---------|---------
@@ -43,17 +39,71 @@ ggplot(data = dat, aes(x=variable.1,y=variable.2)) + geom_point() +
   stat_smooth(method = lm) + ggtitle("Dramatic and concluive statement")
 ```
 
-## Rmd is an easy way to support open access
+## Rmd is an easy way to open access
 
-
+![](http://star.psy.ohio-state.edu/coglab/Pictures/miracle.gif)
 
 ## Rmd is not good for presenting media
 
 ![A youtube link](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
-# And now to some examples
+## A brief history of .md
 
-## Time for you to try it yourselves!
+![](https://gs1.wac.edgecastcdn.net/8019B6/data.tumblr.com/tumblr_ln7va2TrXs1qawld4o1_500.gif)
+
+## Basics of Rmd formatting pt 1
+
+The title of a document is separated by dashed lines:
+
+```
+Audacious title for your document and/or presentation
+---
+```
+
+## Basics of Rmd formatting pt 2
+
+Headings follow the markdown standard hierarchy, with a slight modifications for presentations
+
+```
+# Heading 1 (slide interrupt)
+## Heading 2 (slide title)
+### Heading 3 (subtitle)
+and so on ...
+```
+
+## Basics of Rmd formatting pt 3
+
+Text can be given basic formatting
+
+```
+*italics*
+**bold**
+~subscript~
+^superscript^
+```
+
+## Basics of Rmd formatting pt 4
+
+Code can be echoed and evaluated
+
+```
+{r} 2 + 2
+```
+
+## Basics of Rmd formatting pt 5
+
+Plots can be embedded, with the generative code hidden
+
+```
+{r, echo = FALSE}
+plot(data)
+```
+
+## You don't have to take my word for it
 
 - In the repo, you should see a file called 'your_script.R'
 - Open this in RStudio
+- Create a new Rmd document by following the instructions in the docstring
+- WARNING: I was a litle dishonest in my presentation
+    - Look carefully at the code I used, especially the parts that were not echoed in presentation
+    - See if you can tell a different story about what the data might really mean
