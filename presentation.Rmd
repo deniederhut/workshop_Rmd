@@ -19,7 +19,7 @@ load(file="dat.Rda")
 dat <- dat[1:(dim(dat)[[1]]-2),]
 ```
 
-## Rmd is an easy way to generate documents
+## Rmd is an easy way to write
 
 ```{r}
 model <- t.test(x=dat$variable.4[dat$variable.3 == 'Giant'], 
@@ -34,14 +34,14 @@ Mean | ```r model$estimate[[1]]``` | ```r model$estimate[[2]]```
 
 ## Rmd is an easy way to be reproducible
 
-```{r, echo=FALSE,fig.height=6,fig.width=8}
-ggplot(data = dat, aes(x=variable.1,y=variable.2)) + geom_point() + 
-  stat_smooth(method = lm) + ggtitle("Dramatic and concluive statement")
-```
+![](http://star.psy.ohio-state.edu/coglab/Pictures/miracle.gif)
 
 ## Rmd is an easy way to open access
 
-![](http://star.psy.ohio-state.edu/coglab/Pictures/miracle.gif)
+```{r, echo=FALSE,fig.height=5,fig.width=7}
+ggplot(data = dat, aes(x=variable.1,y=variable.2)) + geom_point() + 
+  stat_smooth(method = lm) + ggtitle("Dramatic and conclusive statement")
+```
 
 ## Rmd is not good for presenting media
 
@@ -99,7 +99,7 @@ Plots can be embedded, with the generative code hidden
 plot(data)
 ```
 
-## You don't have to take my word for it
+## Don't take my word for it!
 
 - In the repo, you should see a file called 'your_script.R'
 - Open this in RStudio
