@@ -1,7 +1,7 @@
 ---
 title: "Keeping it simple with R Markdown"
 author: "Dillon Niederhut"
-date: "February 5, 2015"
+date: "March 20, 2015"
 output: ioslides_presentation
 ---
 
@@ -9,49 +9,79 @@ output: ioslides_presentation
 # I like to use an initial batch of r code to load packages, import data, and do any 
 # other formatting that doesn't need to be seen by your audience. If there are important
 # data processings steps that you want to talk about, this is not the place to put them.
- options(warn=-1)
+# options(warn=-1)
 # When your presentation is ready to roll, uncomment the preceeding line to globally
 # suppress any warnings about errors in your code. Note that if you go back to change
-# something and it messes up a bunch of stuff, you won't get any warnins about the unholy
+# something and it messes up a bunch of stuff, you won't get any warnings about the unholy
 # havoc you have just wrought.
 library(ggplot2)
 load(file="dat.Rda")
 dat <- dat[1:(dim(dat)[[1]]-2),]
 ```
 
+## Overview
+
+![](http://www.rstudio.com/wp-content/uploads/2014/04/markdownChunk.png)
+
+# When should you use Rmd?
+
 ## Rmd is an easy way to write
 
 ```{r}
-model <- t.test(x=dat$variable.4[dat$variable.3 == 'Giant'], 
-                y=dat$variable.4[dat$variable.3 == 'Sandwich'])
+model <- t.test(x=dat$variable.4[dat$variable.3 == 'Giants'], 
+                y=dat$variable.4[dat$variable.3 == 'Athletics'])
 ```
 
-"An independent samples t test showed the groups were not significantly different, t = ```r model$statistic[[1]]```, df = ```r model$parameter[[1]]```, p = ```r model$p.value[[1]]```"
+"An independent samples t test showed the teams were not significantly different in their number of homeruns so far this year, t = `r model$statistic[[1]]`, df = `r model$parameter[[1]]`, p = `r model$p.value[[1]]`"
 
-Unnecessary table | group 1 | group 2
+Homeruns | Giants | Athletics
 ------------------|---------|---------
-Mean | ```r model$estimate[[1]]``` | ```r model$estimate[[2]]```
+Mean | `r model$estimate[[1]]` | `r model$estimate[[2]]`
 
 ## Rmd is an easy way to be reproducible
 
-![](http://star.psy.ohio-state.edu/coglab/Pictures/miracle.gif)
+![miracle](http://star.psy.ohio-state.edu/coglab/Pictures/miracle.gif)
 
 ## Rmd is an easy way to open access
 
 ```{r, echo=FALSE,fig.height=5,fig.width=7}
-ggplot(data = dat, aes(x=variable.1,y=variable.2)) + geom_point() + 
-  stat_smooth(method = lm) + ggtitle("Dramatic and conclusive statement")
+ggplot(data = dat, aes(x=variable.1,y=variable.2)) + geom_point() + stat_smooth(method = lm) + 
+  xlab('Thousands of dollars of debt') + ylab('Number of dates so far this year') + 
+  ggtitle("Positive correlation between debts and dates")
 ```
 
 ## Rmd is not good for presenting media
 
-![A youtube link](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+![A youtube link](http://media.giphy.com/media/Vuw9m5wXviFIQ/giphy.gif)
+[A youtube link](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
-## A brief history of .md
-
-![](https://gs1.wac.edgecastcdn.net/8019B6/data.tumblr.com/tumblr_ln7va2TrXs1qawld4o1_500.gif)
+# How do you use R markdown?
 
 ## Basics of Rmd formatting pt 1
+
+Chunks of code in Rmd are embedded with backticks:
+
+![1](1.png)
+
+## Basics of Rmd formatting pt 2
+
+You can evaluate the code chunk by adding {r}:
+
+![2](2.png)
+
+## Basics of Rmd formatting pt 3
+
+You can suppress the code itself by adding echo=FALSE:
+
+![3](3.png)
+
+## Basics of Rmd formatting pt 3
+
+You can evaluate code within a line by using a single backtick
+
+![4](4.png)
+
+## Basics of Rmd formatting pt 4
 
 The title of a document is separated by dashed lines:
 
@@ -60,7 +90,7 @@ Audacious title for your document and/or presentation
 ---
 ```
 
-## Basics of Rmd formatting pt 2
+## Basics of Rmd formatting pt 5
 
 Headings follow the markdown standard hierarchy, with a slight modifications for presentations
 
@@ -71,7 +101,7 @@ Headings follow the markdown standard hierarchy, with a slight modifications for
 and so on ...
 ```
 
-## Basics of Rmd formatting pt 3
+## Basics of Rmd formatting pt 6
 
 Text can be given basic formatting
 
@@ -82,28 +112,79 @@ Text can be given basic formatting
 ^superscript^
 ```
 
-## Basics of Rmd formatting pt 4
+## Basics of Rmd formatting pt 7
 
-Code can be echoed and evaluated
+Tables are constructed with dashes and pipes, and format automatically
 
-```
-{r} 2 + 2
-```
+![5](5.png)
 
-## Basics of Rmd formatting pt 5
+## Basics of Rmd formatting pt 8
 
-Plots can be embedded, with the generative code hidden
+Links and are embedded using `[name](location)` and images are embedded using `![name](location)`
 
-```
-{r, echo = FALSE}
-plot(data)
-```
+![6](6.png)
 
-## Don't take my word for it!
+# Getting started with Rmd
 
-- In the repo, you should see a file called 'your_script.R'
-- Open this in RStudio
-- Create a new Rmd document by following the instructions in the docstring
-- WARNING: I was a litle dishonest in my presentation
+## Obtaining the necessary materials
+
+If you haven't already, go to:
+
+[github.com/deniederhut/workshop_Rmd](github.com/deniederhut/workshop_Rmd)
+
+- Github is a website for sharing and collaborating
+
+- You can download the code for this workshop as a .zip, or you can clone it with HTTPS or SSH
+
+- You should see cheat sheets in Rmd and HTML, along with a data file, this presentation, and a file called your_script.R
+
+## Getting started in RStudio
+
+- Open the .R script by going to File/Open File and selecting your_script.R
+
+- You will see an .R script containing the same analysis you saw in this presentation
+
+- Open a new .Rmd document by going to New File/Markdown, and selecting Document, then HTML
+
+## Creating your first document pt 1
+
+- Let's start by editing `title`, `author`, and `date` to appropriate values
+
+- If you are creating a document, these will be in the header
+
+- If you are creating a presentation, these will become the title slide
+
+- If you want to make a slide deck instead of a document, you can change `html_document` to `ioslides_presentation`
+
+- Try clicking the `Knit HTML` button to see how things look so far
+
+## Creating your first document pt 2
+
+- The people who want to read your document probably don't need to see the basic setup stuff
+
+- You still need to put it in your document, but can suppress it with the `echo=FALSE` option
+
+![7](7.png)
+
+## Creating your first document pt 3
+
+- Now let's put a little bit of basic information in your document
+
+- You want these code chunks to echo and evaluate, so make sure you include `{r}` when you copy the code over
+
+- We can also put graphs into your document
+
+- Try copying over one of the `qplot` function calls in a code chunk that does not echo
+
+## Creating your first document pt 4
+
+- Keep copy-and-pasting the rest of the .R script into your new Rmd document
+
+- One of the benefits of being open about your methods is that it makes it easy to catch mistakes that might significantly change your analysis
+
+- I purposively made a small mistake when I put together this presentation
+
+- For 10 pts extra credit:
+
     - Look carefully at the code I used, especially the parts that were not echoed in presentation
     - See if you can tell a different story about what the data might really mean
