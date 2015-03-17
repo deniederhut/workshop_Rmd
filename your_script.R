@@ -10,7 +10,8 @@
 
 ### Script follows
 # Loading the required packages
-
+# If you don't have ggplot installed, uncomment and run the following line
+#install.packages('ggplot2')
 library(ggplot2)
 
 # Creating the data that we will use for this workshop
@@ -19,8 +20,8 @@ dat <- data.frame(variable.1 = c(seq(-5,5,1) - rnorm(n=11, mean=0, sd=1.5), 5, -
                   variable.2 = c(seq(-5,5,1) - rnorm(n=11, mean=0, sd=1.5), -5, 5),
                   variable.3 = rbinom(n = 13,size = 1, prob = 0.5))
 dat$variable.4 <- dat$variable.3 + rnorm(13,5,1)
-dat$variable.3[dat$variable.3 == 0] <- 'Giant'
-dat$variable.3[dat$variable.3 == 1] <- 'Sandwich'
+dat$variable.3[dat$variable.3 == 0] <- 'Giants'
+dat$variable.3[dat$variable.3 == 1] <- 'Athletics'
 dat$variable.3 <- as.factor(dat$variable.3)
 save(dat, file = "dat.Rda")
 
@@ -35,7 +36,7 @@ qplot(x = variable.3, y = variable.4, data = dat)
 
 ggplot(data = dat, aes(x=variable.3,y=variable.4)) + 
   geom_jitter(position = position_jitter(width = .1, height = 0))
-t.test(x=dat$variable.4[dat$variable.3 == 'Giant'], y=dat$variable.4[dat$variable.3 == 'Sandwich'])
+t.test(x=dat$variable.4[dat$variable.3 == 'Giants'], y=dat$variable.4[dat$variable.3 == 'Athletics'])
 
 # Creating our second analysis
 
